@@ -1,0 +1,333 @@
+BACKUP SIN VATER:
+
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrrrrrrrr|r}
+\toprule
+
+Subset & DTC & LR & RFC & KNC & SVC & MLPC & XGBC & BC & ABC & GBC &Best \\
+\midrule
+50\% Data - Subset 1  & 0.970 & 0.538 & 0.944 & 0.969 & 0.476 & 0.969 & 0.967 & 0.966 & 0.970 & 0.970 & DCT \\
+50\% Data - Subset 2  & 0.978 & 0.976 & 0.969 & 0.976 & 0.968 & 0.978 & 0.977 & 0.974 & 0.978 & 0.978 & ABC \\
+50\% Data - Subset 3  & 0.994 & 0.991 & 0.996 & 0.993 & 0.995 & 0.995 & 0.996 & 0.995 & 0.995 & 0.996 & XGBC \\
+50\% Data - Subset 4  & 0.995 & 0.993 & 0.996 & 0.989 & 0.995 & 0.996 & 0.997 & 0.996 & 0.996 & 0.997 & XGBC \\
+
+100\% Data - Subset 1 & 0.970 & 0.539 & 0.944 & 0.969 & 0.741 & 0.969 & 0.967 & 0.966 & 0.970 & 0.970 & DCT \\
+100\% Data - Subset 2 & 0.978 & 0.976 & 0.973 & 0.977 & 0.936 & 0.978 & 0.977 & 0.976 & 0.978 & 0.978 & ABC \\
+100\% Data - Subset 3 & 0.995 & 0.991 & 0.996 & 0.994 & 0.994 & 0.995 & 0.996 & 0.996 & 0.995 & 0.996 & XGBC \\
+100\% Data - Subset 4 & 0.995 & 0.993 & 0.997 & 0.990 & 0.995 & 0.997 & 0.997 & 0.997 & 0.996 & 0.997 & XGBC \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy scores of the best model parameters across different subsets and data configurations.}
+\label{tab:accuracy_scores}
+\end{table}
+
+
+
+
+
+\begin{table}[]
+\centering
+\caption{Classification of the Attributes}\label{table:column-types}
+\tiny
+\begin{tabular}{llll}
+\hline
+\textbf{No} & \textbf{Column} & \textbf{Type} & \multicolumn{1}{c}{\textbf{Reasoning}} \\
+\hline
+1           & Unnamed: 0.1         & Nominal                 & Unique identifiers without inherent order. \\
+2           & Unnamed: 0           & Nominal                 & Unique identifiers without inherent order. \\
+3           & RA\_ICRS             & Interval                & ordered values with consistent differences; they lack an absolute zero, making ratios meaningless. \\
+4           & DE\_ICRS             & Interval                & ordered values with consistent differences; they lack an absolute zero, making ratios meaningless; includes negative values, which precludes it from being ratio data. \\
+5           & Source               & Nominal                 & Unique identifiers without inherent order. \\
+6           & Plx                  & Ratio                   & quantifies celestial distance inversely in milliarcseconds, has a true zero (infinite distance), only positive values (distance can't be negative), and supports all arithmetic operations, allowing for direct distance comparison. \\
+7           & PM                   & Ratio                   & measures motion with a true zero (no movement), only has positive values (motion magnitude), and arithmetic operations are valid, making distance comparison straightforward. \\
+8           & pmRA                 & Ratio                & measure rate of change with true zero (no movement); negative values indicate direction, not absence of quantity; all arithmetic operations are meaningful, preserving the properties of ratio scales. \\
+9           & pmDE                 & Ratio                & measure rate of change with true zero (no movement); negative values indicate direction, not absence of quantity; all arithmetic operations are meaningful, preserving the properties of ratio scales. \\
+10          & Gmag                 & Interval                   & measures of apparent magnitude in different bands of light; on a logarithmic scale with an arbitrary zero point; differences, not ratios, are meaningful due to this scale. \\
+11          & e\_Gmag              & Ratio                   & reflect uncertainty not quantity; they're tied to an interval scale (magnitude); and error ratios aren't meaningful, as they don't represent a doubled or halved error. \\
+12          & BPmag                & Interval                   & measures of apparent magnitude in different bands of light; on a logarithmic scale with an arbitrary zero point; differences, not ratios, are meaningful due to this scale. \\
+13          & e\_BPmag             & Ratio                   & reflect uncertainty not quantity; they're tied to an interval scale (magnitude); and error ratios aren't meaningful, as they don't represent a doubled or halved error. \\
+14          & RPmag                & Interval                   & measures of apparent magnitude in different bands of light; on a logarithmic scale with an arbitrary zero point; differences, not ratios, are meaningful due to this scale. \\
+15          & e\_RPmag             & Ratio                   &reflect uncertainty not quantity; they're tied to an interval scale (magnitude); and error ratios aren't meaningful, as they don't represent a doubled or halved error. \\
+16          & GRVSmag              & Interval                   & measures of apparent magnitude in different bands of light; on a logarithmic scale with an arbitrary zero point; differences, not ratios, are meaningful due to this scale. \\
+17          & e\_GRVSmag           & Ratio                   & reflect uncertainty not quantity; they're tied to an interval scale (magnitude); and error ratios aren't meaningful, as they don't represent a doubled or halved error. \\
+18          & BP-RP                & Interval                & are interval data because they are differences of magnitudes; they lack a true zero and ratios are not meaningful; and they are based on a logarithmic scale, which is typical of interval data \\
+19          & BP-G                 & Interval                &are interval data because they are differences of magnitudes; they lack a true zero and ratios are not meaningful; and they are based on a logarithmic scale, which is typical of interval data \\
+20          & G-RP                 & Interval                & are interval data because they are differences of magnitudes; they lack a true zero and ratios are not meaningful; and they are based on a logarithmic scale, which is typical of interval data \\
+21          & pscol                & Ratio                   & true zero point indicating no pseudocolor; it assumes only positive values; and arithmetic operations including ratios are meaningful for comparison. \\
+22          & Teff                 & Ratio                   & measured in Kelvins, which has an absolute zero; and all arithmetic operations including ratios are valid, allowing for comparison of temperatures. \\
+23          & Dist                 & Ratio                   & represents distance in parsecs with an absolute zero (no distance); and it supports all arithmetic operations, allowing for direct comparison of distances. \\
+24          & Rad                  & Ratio                   & measured in solar radii, with a true zero (no size); and supports arithmetic operations, allowing for comparison of celestial sizes. \\
+25          & Lum-Flame            & Ratio                   & a measure of brightness in solar luminosities, with a true zero (no luminosity); and arithmetic operations are valid, enabling comparative analysis of brightness. \\
+26          & Mass-Flame           & Ratio                   & quantifies mass in units of solar mass, with an absolute zero (no mass); and it permits all arithmetic operations, facilitating comparisons of mass. \\
+27          & Age-Flame            & Ratio                   & measures time in gigayears, with a true zero point (the beginning of the object's existence); and arithmetic operations, including ratios, are meaningful, allowing for age comparisons. \\
+28          & z-Flame              & Ratio                   & it expresses redshift velocity in km\/s, with a true zero (no redshift); and allows for all arithmetic operations, enabling quantitative comparison of cosmic expansion effects. \\
+29          & SpType-ELS           & Nominal                 & Attribute defining two distinct classes A and B. \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\col{Unnamed: 0.1}, \col{Unnamed: 0}, \col{Source}: Unique identifiers without inherent order. -> nominal
+
+\col{RA\_ICRS}, \col{DE\_ICRS}: Ordered values with consistent differences; they lack an absolute zero, making ratios meaningless. The latter also includes negative values, which precludes it from being ratio data. -> interval
+
+\col{Plx}: Quantifies celestial distance inversely in milliarcseconds, has a true zero (infinite distance), only positive values (distance can't be negative), and supports all arithmetic operations, allowing for direct distance comparison. -> ratio
+
+\col{PM}: Measures motion with a true zero (no movement), only has positive values (motion magnitude), and arithmetic operations are valid, making distance comparison straightforward. -> ratio
+
+\col{pmRA}, \col{pmDE}: Measure rate of change with true zero (no movement); negative values indicate direction, not absence of quantity; all arithmetic operations are meaningful, preserving the properties of ratio scales. -> ratio
+
+\col{Gmag}, \col{BPmag}, \col{RPmag}, \col{GRVSmag}: Measures of apparent magnitude in different bands of light; on a logarithmic scale with an arbitrary zero point; differences, not ratios, are meaningful due to this scale. -> interval
+
+\col{e\_Gmag}, \col{e\_BPmag}, \col{e\_RPmag}, \col{e\_GRVSmag}: Reflect uncertainty not quantity; they're tied to an interval scale (magnitude); and error ratios aren't meaningful, as they don't represent a doubled or halved error. -> ratio
+
+\col{BP-RP}, \col{BP-G}, \col{G-RP}: Are interval data because they are differences of magnitudes; they lack a true zero and ratios are not meaningful; and they are based on a logarithmic scale, which is typical of interval data. -> interval
+
+\col{pscol}: True zero point indicating no pseudocolor; it assumes only positive values; and arithmetic operations including ratios are meaningful for comparison. -> ratio
+
+\col{Teff}: Measured in Kelvins, which has an absolute zero; and all arithmetic operations including ratios are valid, allowing for comparison of temperatures. -> ratio
+
+\col{Dist}: Represents distance in parsecs with an absolute zero (no distance); and it supports all arithmetic operations, allowing for direct comparison of distances. -> ratio
+
+\col{Rad}: Measured in solar radii, with a true zero (no size); and supports arithmetic operations, allowing for comparison of celestial sizes. -> ratio
+
+\col{Lum-Flame}: A measure of brightness in solar luminosities, with a true zero (no luminosity); and arithmetic operations are valid, enabling comparative analysis of brightness. -> ratio
+
+\col{Mass-Flame}: Quantifies mass in units of solar mass, with an absolute zero (no mass); and it permits all arithmetic operations, facilitating comparisons of mass. -> ratio
+
+\col{Age-Flame}: Measures time in gigayears, with a true zero point (the beginning of the object's existence); and arithmetic operations, including ratios, are meaningful, allowing for age comparisons. -> ratio
+
+\col{z-Flame}: It expresses redshift velocity in km/s, with a true zero (no redshift); and allows for all arithmetic operations, enabling quantitative comparison of cosmic expansion effects. -> ratio
+
+\col{SpType-ELS}: Attribute defining two distinct classes A and B. -> nominal
+
+
+
+\begin{table}[]
+\centering
+\caption{Classification of the Attributes}\label{table:column-types}
+\scriptsize
+\begin{tabular}{lll}
+\hline
+\textbf{No} & \textbf{Column} & \textbf{Type} \\
+\hline
+1           & Unnamed: 0.1         & Nominal                 \\
+2           & Unnamed: 0           & Nominal                 \\
+3           & RA\_ICRS             & Interval                \\
+4           & DE\_ICRS             & Interval                \\
+5           & Source               & Nominal                 \\
+6           & Plx                  & Ratio                   \\
+7           & PM                   & Ratio                   \\
+8           & pmRA                 & Ratio                \\
+9           & pmDE                 & Ratio                \\
+10          & Gmag                 & Interval                   \\
+11          & e\_Gmag              & Ratio                   \\
+12          & BPmag                & Interval                   \\
+13          & e\_BPmag             & Ratio                   \\
+14          & RPmag                & Interval                   \\
+15          & e\_RPmag             & Ratio                   \\
+16          & GRVSmag              & Interval                   \\
+17          & e\_GRVSmag           & Ratio                   \\
+18          & BP-RP                & Interval                \\
+19          & BP-G                 & Interval                \\
+20          & G-RP                 & Interval                \\
+21          & pscol                & Ratio                   \\
+22          & Teff                 & Ratio                   \\
+23          & Dist                 & Ratio                   \\
+24          & Rad                  & Ratio                   \\
+25          & Lum-Flame            & Ratio                   \\
+26          & Mass-Flame           & Ratio                   \\
+27          & Age-Flame            & Ratio                   \\
+28          & z-Flame              & Ratio                   \\
+29          & SpType-ELS           & Nominal                 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\col{GRVSmag}: About 40\% of the data is missing, we cannot throw away all data. Imputing with he median is advised to maintain robustness. (median for Group A is about 11.4 and median for group B is about 10.8)
+\col{e\_GRVSmag}: About 40\% of the data is missing, we cannot throw away all data. Imputing with he median is advised to maintain robustness. (median for both groups about 0.01)
+\col{Age-Flame}: About 25\% of the data is missing, we cannot throw away all data. Imputing with he median is advised to maintain robustness. (median for Group A is about 0.75 and median for group B is about 0.3)
+
+
+In a folliwng step, the not yet standardized columns were normalisted. For that the follwoing python code was applied to identify relevant standardistaiton techniques. The corresponding hyperparemters (e.g., \texttt{SKEWNESS\_THRESHOLD} and \texttt{OUTLIER\_COUNT\_THRESHOLD}) were not speficically tuned, but instead a best-effort appraoch was taken. After that, the reamining colums were preprocessed using the Python code depicted in Listing~\ref{lst:suggest_scaler}.
+
+
+
+
+
+Based on the description of attributes from the Gaia catalogue data, here are some interesting findings or studies that could be suggested:
+
+Galactic Mapping: With the RA_ICRS and DE_ICRS, along with distance (Dist), you can create a three-dimensional map of a section of the Milky Way galaxy. This can help in understanding the structure of our galaxy.
+
+Stellar Kinematics: Using proper motion (PM, pmRA, pmDE) and redshift (z-Flame), researchers can study the movement of stars within the galaxy. This can lead to insights into the dynamics of stellar populations and the gravitational influence of dark matter.
+
+Star Formation Histories: The Age-Flame attribute can be used to investigate the distribution of stellar ages within various regions of the galaxy, potentially revealing star formation rates and histories.
+
+Stellar Evolution: By examining Lum-Flame, Teff, Mass-Flame, and Rad, astronomers can study how stars evolve over time and how they end their life cycles—whether they'll become white dwarfs, neutron stars, or black holes.
+
+Stellar Populations: The SpType-ELS can be used to categorize stars into different spectral types, which can be correlated with other attributes like Teff and Lum-Flame to classify and study different populations of stars.
+
+Search for Exoplanets: The Gaia catalogue's precise measurements of stellar positions and movements can be used to detect slight wobbles in a star’s position, which might indicate the presence of orbiting exoplanets.
+
+Distance Ladder Calibration: With precise parallax measurements (Plx), Gaia data can be used to calibrate the cosmic distance ladder, which is fundamental for measuring distances in the universe.
+
+Astrophysical Phenomena: Correlating color indices (BP-RP, BP-G, G-RP) with apparent magnitudes (Gmag, BPmag, RPmag) can help identify astrophysical phenomena such as interstellar extinction and the intrinsic luminosity of stars.
+
+Metallicity Studies: Pseudocolor (pscol) is related to the amount of metal in a star's spectrum. Analyzing this in conjunction with spectral class (SpType-ELS) could help in understanding the metallicity distribution in the galaxy.
+
+Gravitational Lensing Events: The precise position and movement data may help in identifying stars that act as gravitational lenses, leading to the discovery of more distant objects through the lensing effect.
+
+Dark Matter Mapping: By studying the movements and velocities of stars (using PM, pmRA, pmDE, z-Flame), scientists can infer the distribution of dark matter, which affects the motion of stars through its gravitational effects.
+
+
+
+
+\subsection{Conclusion}
+
+\subsubsection{}*{Correlations in Magnitudes and Color Indices}
+\begin{itemize}
+  \item Magnitudes across different bands (\textit{GRVSmag, RPmag, BPmag, Gmag}) are correlated, indicating a consistency in the assessment of a star's luminosity across these bands.
+  \item Color indices (\textit{BP-RP, BP-G, G-RP}) show strong inter-correlations. They are derived from the magnitudes and offer insights into the star's temperature, with the color becoming bluer as the temperature increases.
+  \item A notable correlation exists between parallax (\textit{Plx}) and color indices, suggesting distance may affect perceived stellar properties, potentially due to interstellar reddening.
+\end{itemize}
+
+\subsubsection*{Mass-Luminosity Relation and Measurement Errors}
+
+\begin{itemize}
+  \item A clear correlation is observed between mass (\textit{Mass-Flame}) and luminosity (\textit{Lum-Flame}), supporting the mass-luminosity relationship, where more massive stars are generally more luminous and hotter (\textit{Teff}).
+  \item Errors in magnitude measurements (\textit{e\_BPmag, e\_RPmag}) are likely correlated due to similar sources of uncertainty in the observation process.
+\end{itemize}
+
+\subsubsection*{Distribution Characteristics and Missing Data}
+
+\begin{itemize}
+  \item Missing data is most prevalent for \textit{GRVSmag}, suggesting limitations in instrument sensitivity or data processing approaches.
+  \item The distribution of \textit{GRVSmag} shows an unusual drop, indicating potential areas for further investigation.
+\end{itemize}
+
+\subsubsection*{Data Distributions and Group Comparisons}
+
+\begin{itemize}
+  \item Attributes such as \textit{pmRA, pmDE, e\_Gmag, e\_BPmag, e\_RPmag, e\_GRVSmag, BP-RP, BP-G, G-RP, Rad, Lum-Flame, z-Flame} exhibit similar distributions, suggesting these properties may behave consistently across different groups.
+  \item In contrast, \textit{RA\_ICRS, DE\_ICRS, PLX, PM, Gmag, BPmag, RPmag, GRVSmag} show divergent distributions, which may reflect intrinsic differences in star populations or observational biases.
+  \item Some attributes like \textit{Teff, Dist, Mass-Flame, Age-Flame} stand out for their ability to differentiate between groups, indicating their importance in stellar classification.
+\end{itemize}
+
+
+
+
+
+
+Although some really interesting patterns occur with any combination with \col{Source}, \col{Unnamed} and \col{Unnamed} it does not make sense to investigate those. This is due to the fact that does are arbitrary indexes and do not provide more information to the data. 
+
+We identified highly correlated groups, which can be explained as follows. 
+
+\begin{itemize}
+  \item The magnitudes \col{GRVSmag}, \col{RPmag}, \col{BPmag}, and \col{Gmag} are all brightness measures, hence they are naturally correlated as they reflect a star's overall luminosity.
+  \item Color indices \col{BP-RP}, \col{BP-G}, and \col{G-RP} derive from the aforementioned magnitudes; their strong inter-correlations are due to their shared basis in these magnitudes.
+  \item The correlation between color indices and \col{Plx} suggests that parallax, which is indicative of distance, might influence perceived color properties.
+  \item The \col{Mass-Flame}'s correlation with both \col{Teff} and \col{Lum-Flame} aligns with the mass-luminosity relationship and the concept that more massive stars are typically hotter.
+  \item Errors in magnitude measurements, \col{e\_BPmag} and \col{e\_RPmag}, are correlated likely due to similar sources of observational uncertainty: Using the same instruments will most likely introduce the same errors.
+\end{itemize}
+
+The missing data analysis reveals:
+\begin{itemize}
+  \item Most of the data is missing for \col{GRVSmag}.
+  \item The overall amount of outliers is relatively high, reaching from 0 to 63 (2.1\% of the total data).
+  \item Column \col{GRVSmag} has a very odd distribution (sudden drop at 12). It seems like missing data that would be useful to investigate more.
+\end{itemize}
+
+The boxplots, boxenplots, and violin plots reveal:
+\begin{itemize}
+  \item The following attributes have a similar distribution, subsequently also similar values in mean, median etc with respect to the different groups \texttt{A} and \texttt{B}: \col{pmRA}, \col{pmDE}, \col{e\_Gmag}, \col{e\_BPmag}, \col{e\_RPmag}, \col{e\_GRVSmag}, \col{BP-RP}, \col{BP-G}, \col{G-RP}, \col{Rad}, \col{Lum-Flame}, \col{z-Flame}.
+  \item The following attributes have a very different distribution, subsequently also different values in mean, median etc with respect to the different groups \col{A} and \col{B}: \col{RA\_ICRS}, \col{DE\_ICRS}, \col{PLX}, \col{PM}, \col{Gmag}, \col{BPmag}, \col{RPmag}, \col{GRVSmag}.
+  \item Noteworthy to mention are the very good attributes separable: \col{Teff}, \col{Dist}, \col{Mass-Flame}, \col{Age-Flame}.
+\end{itemize}
+
+
+
+\subsection*{Patterns and Correlations}
+
+We observe that combinations involving \col{Source} or columns with no specific names (referred to as \col{Unnamed}) show patterns, but these are not explored further due to their nature as arbitrary indices without additional informative value.
+
+\subsection*{Correlated Groups}
+
+\begin{itemize}
+  \item The magnitudes \col{GRVSmag}, \col{RPmag}, \col{BPmag}, and \col{Gmag} reflect a star's overall luminosity and are naturally correlated.
+  \item Color indices \col{BP-RP}, \col{BP-G}, and \col{G-RP} derive from magnitudes and exhibit strong inter-correlations.
+  \item A correlation between color indices and parallax (\col{Plx}) suggests distance may influence perceived color properties.
+  \item Mass (\col{Mass-Flame}) correlates with temperature (\col{Teff}) and luminosity (\col{Lum-Flame}), consistent with the mass-luminosity relationship.
+  \item Errors in magnitude measurements (\col{e\_BPmag} and \col{e\_RPmag}) are correlated, indicating similar sources of observational uncertainty.
+\end{itemize}
+
+\subsection*{Missing Data and Distribution Characteristics}
+
+\begin{itemize}
+  \item A significant proportion of data is missing for \col{GRVSmag}, necessitating further investigation.
+  \item Anomalies such as a distribution "drop" at the value of 12 for \col{GRVSmag} are observed, suggesting possible areas for future research.
+\end{itemize}
+
+\subsection*{Comparative Analysis of Distributions}
+
+Boxplots and violin plots reveal:
+
+\begin{itemize}
+  \item Attributes such as \col{pmRA}, \col{pmDE}, \col{e\_Gmag}, \col{e\_BPmag}, \col{e\_RPmag}, \col{e\_GRVSmag}, \col{BP-RP}, \col{BP-G}, \col{G-RP}, \col{Rad}, \col{Lum-Flame}, and \col{z-Flame} show similar distributions across groups \texttt{A} and \texttt{B}.
+  \item Distributions and central tendency measures (mean, median) for \col{RA\_ICRS}, \col{DE\_ICRS}, \col{PLX}, \col{PM}, \col{Gmag}, \col{BPmag}, \col{RPmag}, and \col{GRVSmag} vary between the groups.
+  \item Attributes such as \col{Teff}, \col{Dist}, \col{Mass-Flame}, and \col{Age-Flame} provide clear separation between groups, highlighting their discriminative power.
+\end{itemize}
+
+
+
+\subsection{Interesting Clusters for further examination}
+\label{subsection:interesting_clusters_for_further_examination}
+
+Using the scatter plots, we can reveal the following interesting groups to be examined further
+\begin{itemize}
+    \item \gra has a \col{Teff} of 7000 - 10000 and a \col{Age-Flame} from 0.25 up to 1.5.
+    \item \grb has a \col{Teff} of 10000 - 200000 and a \col{Age-Flame} from 0.25 up to 0.5.
+
+    \item \gra has a \col{Teff} of 7000 - 10000 and a \col{Mass-Flame} from 1.3 to 3.
+    \item \grb has a \col{Teff} of 10000 - 200000 and a \col{Mass-Flame} from 2 to 7.
+
+    \item \gra has a \col{Teff} of 7000 - 10000 and a \col{RPmag} from 6 to 14.
+    \item \grb has a \col{Teff} of 10000 - 200000 and a \col{RPmag} from 9 to 17.
+
+    \item \gra has a \col{Teff} of 7000 - 10000 and a \col{Rad} from 1 to 6.
+    \item \grb has a \col{Teff} of 10000 - 200000 and a \col{Rad} from 1 to 6.
+\end{itemize}
+
+Cluster anaylsis with PCA, UMAP and t-SNE provides evidence that PCA did not really work out, whereas the other two nonlinear methods were able to idnetify clusters. Not only could 2 distinct groups beeen formed, they also match the classes quite well. This suggests that the data contains some non-linear nature. Refering to the hierachichal clusteirng, it would be ineresting if there are any subgroups within \gra and \grb present.
+
+
+
+\subsection{Description of Data Mining Problem}
+The objective of this project is to develop a classifier to predict the "SpType-ELS" attribute, which represents the estimated spectral class by Gaia. This attribute is categorical with possible values "A" and "B". The goal is to leverage various state-of-the-art classification algorithms to accurately classify spectral types based on the provided dataset.
+
+\subsection{Task Details}
+As a data scientist, you will build and evaluate multiple classifiers using techniques covered in lectures. The tasks include:
+\begin{itemize}
+    \item Preprocessing the data.
+    \item Building classifiers using KNIME or Python.
+    \item Evaluating and selecting the best model based on performance metrics.
+    \item Explaining the chosen model and its parameters.
+\end{itemize}
+
+\subsection{Datasets}
+Three datasets are provided:
+\begin{itemize}
+    \item \textbf{Training Dataset:} For training and optimizing the model.
+    \item \textbf{Unknown Dataset:} For final model assessment.
+    \item \textbf{Sample Submission:} Shows the correct format for submitting predictions to Kaggle.
+\end{itemize}
+
+\subsection{Classification Task}
+The primary task is to build a classifier for the "SpType-ELS" attribute. Effective preprocessing, feature engineering, and thorough evaluation are crucial for identifying the best-performing model.
+
+\subsection{Submission}
+Submit the predictions as a .csv file on Kaggle, ensuring the format aligns with the sample submission.
