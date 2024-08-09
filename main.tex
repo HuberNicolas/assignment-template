@@ -1,0 +1,169 @@
+% =============================================================================
+% LaTeX Template for Academic Documents
+% Author: Nicolas Huber
+% Email: nicolas.huber2@uzh.ch
+% Github: HuberNicolas
+%
+% This template is designed for academic and professional documents.
+% You are welcome to modify it to suit your requirements. Attribution is appreciated but not mandatory.
+% =============================================================================
+
+\documentclass[10pt]{article}
+
+% --- Package Inclusions ---
+\usepackage[a4paper]{geometry} % Page layout
+ \geometry{
+ a4paper,
+ total={180mm,257mm},
+ left=10mm,
+ top=10mm,
+ }
+\usepackage{amsmath,amssymb,amsfonts} % Mathematical symbols and fonts
+\usepackage{zi4} % Font for code listings
+\usepackage{graphicx} % Image and figure handling
+\usepackage{float} % Enhanced control over float objects
+\usepackage{listings} % Code listing support
+\usepackage{cite} % Bibliography management
+\usepackage{enumitem} % Customized lists
+\usepackage{algorithmic} % Algorithm environment
+\usepackage{textcomp} % Additional text symbols
+\usepackage{xcolor} % Color management
+\usepackage{booktabs} % Professional quality tables
+\usepackage{hyperref} % Hyperlinks
+\usepackage{xparse} % Command parsing
+\usepackage{subcaption} % Subfigures and subcaptions
+\usepackage{longtable} % Multi-page tables
+\usepackage{array} % Enhanced table options
+\usepackage{pifont} % Special symbols like ticks and crosses
+\usepackage[english]{babel} % Language support
+\usepackage{blindtext} % Dummy text
+\usepackage{ifthen} % Conditional statements
+% --- End of Package Inclusions ---
+
+% --- Custom Commands ---
+
+% ============================ DOCUMENT OPTIONS ===============================
+
+% Highlight a piece of text with a Burnt Orange background
+\newcommand{\cmmd}[1]{\colorbox{BurntOrange}{#1}}
+
+% Arrow symbol for inline use
+\newcommand{\ar}{$\rightarrow$ }
+
+% Common abbreviations for ease of use
+\newcommand{\ie}{\textit{i.e., }} % "that is"
+\newcommand{\eg}{\textit{e.g., }} % "for example"
+\newcommand{\etal}{\textit{et al. }} % "and others"
+\newcommand{\cf}{\textit{cf. }} % "compare with"
+\newcommand{\til}{\char`\~} % Tilde symbol
+
+% Custom and specific abbreviations
+\NewDocumentCommand{\col}{m}{\textit{#1}}
+\newcommand{\gra}{\texttt{Group A }}
+\newcommand{\grb}{\texttt{Group B }}
+\newcommand{\filename}[1]{\texttt{#1}}
+
+
+% ============================== HEADER OPTIONS ===============================
+
+% =============================================================================
+% University Selection Logic
+% =============================================================================
+\newcommand{\setuniversity}[1]{%
+  \def\universityname{#1}%
+  \ifthenelse{\equal{#1}{uts}}{%
+    \def\universitylogo{assets/images/uts-logo.png} % UTS logo path
+    \def\universitytext{University of Technology Sydney} % UTS name
+  }{%
+    \def\universitylogo{assets/images/uzh-logo.png} % UZH logo path
+    \def\universitytext{University of Zurich} % UZH name
+  }%
+}
+
+% Set default university if not specified by the user
+\setuniversity{uts}
+
+% =============================================================================
+% Custom Commands for Title Page Parameters
+% =============================================================================
+
+\newcommand{\Course}{Fundamentals of Data Analytics} % Course name
+\newcommand{\CourseNo}{30539} % Course number
+\newcommand{\Title}{Assessment Task 3: Data Analytics in Action} % Document title
+\newcommand{\StudentName}{Nicolas Huber} % Student's full name
+\newcommand{\StudentId}{25061944} % Student ID number
+
+% --- End of Custom Commands ---
+
+
+% --- Custom Colors ---
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+% --- End of Custom Colors ---
+
+% --- Listing Settings ---
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  commentstyle=\color{deepgreen},
+  keywordstyle=\color{deepblue},
+  stringstyle=\color{deepred},
+  showstringspaces=false,
+  frame=none, % Options: none, single
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=false,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\lstdefinestyle{bashstyle}{
+  language=bash,
+  backgroundcolor=\color{gray!10}, % Light gray background
+  morekeywords={dstat, --output},
+}
+
+\lstdefinestyle{pythonstyle}{
+  language=Python,
+  backgroundcolor=\color{gray!10}, % Light gray background
+  morekeywords={def, return, if, else, print},
+}
+% --- End of Listing Settings ---
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    \Huge
+    \textbf{\Course}\\
+    \vspace{0.5cm}
+    \LARGE
+    Course Number: \CourseNo\\
+    \vspace{1.5cm}
+    \textbf{\Title}\\
+    \vspace{2cm}
+    \textbf{\universitytext}\\
+    \vfill
+    \includegraphics[width=0.4\textwidth]{\universitylogo}\\
+    \vfill
+    \Large
+    \StudentName\\
+    Student ID: \StudentId\\
+    Date: \today
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+\input{01_introduction}
+\newpage
+\input{02_description}
+\newpage
+\input{03_data_preprocessing}
+\newpage
+\appendix
+\input{09_appendix}
+\newpage
+
+\end{document}
