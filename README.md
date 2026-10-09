@@ -8,7 +8,7 @@
 ![Overleaf](https://img.shields.io/badge/Overleaf-47A141?logo=overleaf&logoColor=white)
 ![biblatex](https://img.shields.io/badge/biblatex-biber-2565AE)
 [![Build PDF](https://github.com/HuberNicolas/assignment-template/actions/workflows/build.yml/badge.svg)](https://github.com/HuberNicolas/assignment-template/actions/workflows/build.yml)
-![License](https://img.shields.io/badge/License-GPLv3-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 [Preview](#preview) · [Quick start](#quick-start) · [Usage](#usage) · [PDF](https://github.com/HuberNicolas/assignment-template/releases/latest)
 
@@ -160,8 +160,7 @@ as a workflow artifact. Pushing a tag `v*` also attaches the PDF to a GitHub rel
 
 ## License
 
-[GNU General Public License v3.0](LICENSE) © 2024 Nicolas Huber. Modified versions of the template must also be
-released under the GPLv3 and keep the copyright notice. The example figures are from
+[MIT](LICENSE) © 2024 Nicolas Huber. The example figures are from
 [gaia-classifier](https://github.com/HuberNicolas/gaia-classifier); the cited article belongs to its authors.
 
 ## Author

@@ -20,6 +20,6 @@ Open tasks for the template.
 
 ## 3. License and release
 
-- [x] Add the GPLv3 text the README referred to
-- [ ] Decide whether GPLv3 stays or the template moves to MIT like `minimalistic-cv-template`
+- [x] Add a LICENSE file (the README referred to one that did not exist)
+- [x] Switch from GPLv3 to MIT, like `minimalistic-cv-template`
 - [x] Tag the 2024 state as `v1.0.0` and the update as `v2.0.0`
