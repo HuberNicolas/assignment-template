@@ -1,0 +1,114 @@
+% assignment.sty -- layout, title page and macros for assignments and reports
+% https://github.com/HuberNicolas/assignment-template
+%
+% Use with the article class. Load babel before this package.
+% Compiles with pdfLaTeX, XeLaTeX and LuaLaTeX; the bibliography needs biber.
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesPackage{assignment}[2026/10/09 v2.0 Assignments and reports]
+
+% --- Fonts ---
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{lmodern}
+  \RequirePackage[varqu, varl]{zi4} % Inconsolata for code
+\else
+  \RequirePackage{fontspec}
+  \setmonofont{Inconsolatazi4}[Scale=MatchLowercase]
+\fi
+\RequirePackage{microtype}
+
+% --- Layout ---
+\RequirePackage[a4paper, margin=2.5cm]{geometry}
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage{xspace}
+
+% --- Math ---
+\RequirePackage{amsmath, amssymb}
+
+% --- Figures and tables ---
+\RequirePackage{graphicx}
+\RequirePackage{float}          % [H] placement
+\RequirePackage{booktabs}       % \toprule, \midrule, \bottomrule
+\RequirePackage{array}
+\RequirePackage{longtable}      % tables across pages
+\RequirePackage{caption}
+\RequirePackage{subcaption}     % subfigures
+\RequirePackage{pifont}         % \ding{51} (tick), \ding{55} (cross)
+\captionsetup{font=small, labelfont=bf}
+
+% --- Code ---
+\RequirePackage{listings}
+\definecolor{code-keyword}{rgb}{0, 0, 0.5}
+\definecolor{code-string}{rgb}{0.6, 0, 0}
+\definecolor{code-comment}{rgb}{0, 0.5, 0}
+\definecolor{code-background}{gray}{0.95}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{code-keyword}\bfseries,
+  stringstyle=\color{code-string},
+  commentstyle=\color{code-comment},
+  backgroundcolor=\color{code-background},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=none,
+  showstringspaces=false,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  captionpos=b,
+  upquote=true,
+}
+\lstdefinestyle{python}{language=Python}
+\lstdefinestyle{bash}{language=bash}
+
+% --- Bibliography (biber) ---
+\RequirePackage{csquotes}
+\RequirePackage[backend=biber, style=ieee]{biblatex}
+
+% --- Links and references (load last) ---
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[capitalise, noabbrev]{cleveref} % \cref{fig:x} -> "Figure 1"
+
+% --- Title page ---
+% Set in the preamble: \title, \author, \date and the commands below.
+\newcommand{\course}[1]{\def\as@course{#1}}
+\newcommand{\coursenumber}[1]{\def\as@coursenumber{#1}}
+\newcommand{\institution}[1]{\def\as@institution{#1}}
+\newcommand{\logo}[1]{\def\as@logo{#1}}             % path to an image, optional
+\newcommand{\studentid}[1]{\def\as@studentid{#1}}
+\course{}\coursenumber{}\institution{}\logo{}\studentid{}
+
+\newcommand{\as@ifset}[2]{\ifx#1\@empty\else#2\fi}
+\renewcommand{\maketitle}{%
+  \begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    \as@ifset\as@course{{\Huge\bfseries\as@course\par}\vspace{0.5cm}}
+    \as@ifset\as@coursenumber{{\LARGE Course number: \as@coursenumber\par}}
+    \vspace{1.5cm}
+    {\LARGE\bfseries\@title\par}
+    \vspace{2cm}
+    \as@ifset\as@institution{{\LARGE\bfseries\as@institution\par}}
+    \vfill
+    \as@ifset\as@logo{\includegraphics[width=0.4\textwidth]{\as@logo}\par\vfill}
+    {\Large\@author\par}
+    \as@ifset\as@studentid{{\Large Student ID: \as@studentid\par}}
+    {\Large\@date\par}
+  \end{titlepage}
+  \hypersetup{pdftitle={\@title}, pdfauthor={\@author}}%
+}
+
+% --- Macros ---
+\newcommand{\ie}{\textit{i.e.,}\xspace}       % that is
+\newcommand{\eg}{\textit{e.g.,}\xspace}       % for example
+\newcommand{\etal}{\textit{et al.}\xspace}    % and others
+\newcommand{\cf}{\textit{cf.}\xspace}         % compare
+\newcommand{\ar}{\ensuremath{\rightarrow}\xspace} % arrow in text
+\newcommand{\highlight}[1]{\colorbox{BurntOrange!40}{#1}} % mark text
+\newcommand{\col}[1]{\textit{#1}}            % column or variable name
+\newcommand{\filename}[1]{\texttt{#1}}       % file name
+
+% License
+% Copyright (C) 2024 Nicolas Huber, nicolas.huber.dev@gmail.com
+% See the LICENSE file.
